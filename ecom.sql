@@ -161,7 +161,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`,
  `name`,
- `email`, `p/hone`, `address`, `password`, `created_at`, `status`) VALUES
+ `email`, `phone`, `address`, `password`, `created_at`, `status`) VALUES
 (1, 'Rumaisa Awan', 
 'rumaisa@gmail.com', 
 '085819980891', 
@@ -265,3 +265,27 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+ALTER TABLE order_details
+ADD CONSTRAINT fk_orderdetails_orders
+FOREIGN KEY (id_orders)
+REFERENCES orders(id_orders)
+ON DELETE CASCADE;
+
+ALTER TABLE orders
+ADD CONSTRAINT fk_orders_user
+FOREIGN KEY (id_user)
+REFERENCES user(id_user)
+ON DELETE CASCADE;
+
+ALTER TABLE order_details
+ADD CONSTRAINT fk_orderdetails_product
+FOREIGN KEY (id_product)
+REFERENCES product(id_product)
+ON DELETE CASCADE;
+
+ALTER TABLE cart
+ADD CONSTRAINT fk_cart_product
+FOREIGN KEY (id_product)
+REFERENCES product(id_product)
+ON DELETE CASCADE;
